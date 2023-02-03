@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import BookItem from "./BookItem";
 import { getBooks } from "../../Store/bookSlice";
 
-const BookList = () => {
+const BookList = ({ readBook }) => {
   const { books, isPending } = useSelector((state) => state.books);
   const dispatch = useDispatch();
 
@@ -12,7 +12,10 @@ const BookList = () => {
   }, [dispatch]);
 
   const bookListContent =
-    books && books.map((book) => <BookItem key={book.id} book={book} />);
+    books &&
+    books.map((book) => (
+      <BookItem key={book.id} book={book} readBook={readBook} />
+    ));
   return (
     <div className="col bookList">
       <h2 className="mb-3">Booklist</h2>
