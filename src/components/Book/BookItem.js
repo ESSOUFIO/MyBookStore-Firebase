@@ -1,19 +1,26 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { deleteBook } from "../../Store/bookSlice";
 
-const BookItem = () => {
+const BookItem = ({ book }) => {
+  const dispatch = useDispatch();
   return (
     <div className="list-group-item d-flex justify-content-between">
-      <h6 className="m-0 pt-2">An item</h6>
+      <h6 className="m-0 pt-2">{book.title}</h6>
 
       <div
-        class="btn-group"
+        className="btn-group"
         role="group"
         aria-label="Basic mixed styles example"
       >
-        <button type="button" class="btn btn-primary">
+        <button type="button" className="btn btn-primary">
           Read
         </button>
-        <button type="button" class="btn btn-danger">
+        <button
+          type="button"
+          className="btn btn-danger"
+          onClick={() => dispatch(deleteBook(book))}
+        >
           Delete
         </button>
       </div>
