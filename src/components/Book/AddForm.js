@@ -10,15 +10,26 @@ const AddForm = () => {
           </label>
           <input type="text" class="form-control" id="title" />
         </div>
+
         <div class="mb-3">
-          <label for="exampleFormControlTextarea1" class="form-label">
-            Example textarea
+          <label for="author" class="form-label">
+            Author
           </label>
-          <textarea
-            class="form-control"
-            id="exampleFormControlTextarea1"
-            rows="3"
-          ></textarea>
+          <input type="text" class="form-control" id="author" />
+        </div>
+
+        <div class="mb-3">
+          <label for="price" class="form-label">
+            Price
+          </label>
+          <input type="text" class="form-control" id="Price" />
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">
+            Description
+          </label>
+          <textarea class="form-control" id="description" rows="3"></textarea>
         </div>
         <button type="submit" className="btn btn-primary">
           Submit
