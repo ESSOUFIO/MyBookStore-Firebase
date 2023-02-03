@@ -5,6 +5,7 @@ import { deleteBook, selectBook } from "../../Store/bookSlice";
 const BookItem = ({ book }) => {
   const dispatch = useDispatch();
   const { bookSelected } = useSelector((state) => state.books);
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   let BgLineSelected = "white";
   if (bookSelected && book.id === bookSelected.id) {
@@ -36,6 +37,7 @@ const BookItem = ({ book }) => {
           type="button"
           className="btn btn-danger"
           onClick={() => dispatch(deleteBook(book))}
+          disabled={!isLoggedIn}
         >
           Delete
         </button>

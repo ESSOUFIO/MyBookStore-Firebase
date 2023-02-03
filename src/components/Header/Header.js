@@ -1,8 +1,12 @@
 import React, { Fragment } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logInOut } from "../../Store/authSlice";
 
 const Header = () => {
   const { error } = useSelector((state) => state.books);
+  const { isLoggedIn } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
   return (
     <Fragment>
       {error ? (
@@ -19,8 +23,21 @@ const Header = () => {
           <a className="navbar-brand" href="/">
             MyBookStore
           </a>
-          <button className="btn btn-outline-primary" type="button">
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={() => dispatch(logInOut())}
+            style={{ display: isLoggedIn ? "none" : "block" }}
+          >
             Login
+          </button>
+          <button
+            className="btn btn-outline-primary"
+            type="button"
+            onClick={() => dispatch(logInOut())}
+            style={{ display: isLoggedIn ? "block" : "none" }}
+          >
+            Logout
           </button>
         </div>
       </nav>
