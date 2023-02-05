@@ -17,3 +17,9 @@ root.render(
 );
 
 reportWebVitals();
+
+//! TODO: Modal insert book
+//! TODO: Modal delete
+//! TODO: filter
+//! Firebase
+//! Light / Dark theme

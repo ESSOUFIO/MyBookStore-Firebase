@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { inserBook } from "../../Store/bookSlice";
+import { showHideModal } from "../../Store/uiSlice";
 
 const AddForm = () => {
   const titleRef = useRef();
@@ -8,6 +9,7 @@ const AddForm = () => {
   const authorRef = useRef();
   const descriptionRef = useRef();
   const dispatch = useDispatch();
+  const { modalInsert } = useSelector((state) => state.ui);
 
   const SubmitHandler = (e) => {
     e.preventDefault();
@@ -19,6 +21,7 @@ const AddForm = () => {
       description: descriptionRef.current.value,
     };
     dispatch(inserBook(newBook));
+    dispatch(showHideModal("Insert"));
     titleRef.current.value = "";
     priceRef.current.value = "";
     authorRef.current.value = "";
@@ -27,7 +30,10 @@ const AddForm = () => {
 
   const { isLoggedIn } = useSelector((state) => state.auth);
   return (
-    <div className="col-6" style={{ margin: "30px auto" }}>
+    <div
+      className="AddForm px-4"
+      style={{ margin: "30px auto", display: modalInsert ? "block" : "none" }}
+    >
       <h2 className="mb-3">Insert a book</h2>
 
       <form onSubmit={SubmitHandler}>
@@ -41,6 +47,7 @@ const AddForm = () => {
               className="form-control"
               id="title"
               ref={titleRef}
+              autoComplete="off"
             />
           </div>
 
@@ -53,6 +60,7 @@ const AddForm = () => {
               className="form-control"
               id="author"
               ref={authorRef}
+              autoComplete="off"
             />
           </div>
 
@@ -61,10 +69,11 @@ const AddForm = () => {
               Price
             </label>
             <input
-              type="text"
+              type="number"
               className="form-control"
               id="price"
               ref={priceRef}
+              autoComplete="off"
             />
           </div>
 
@@ -77,6 +86,7 @@ const AddForm = () => {
               id="description"
               rows="3"
               ref={descriptionRef}
+              autoComplete="off"
             ></textarea>
           </div>
           <button

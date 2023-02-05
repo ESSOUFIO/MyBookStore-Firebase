@@ -2,3 +2,7 @@
   padding-right: "25px";
   border-right: 1px solid lightgray;
 }
+
+.AddForm {
+  width: 50vw;
+}

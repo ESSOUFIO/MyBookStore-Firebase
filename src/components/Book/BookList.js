@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BookItem from "./BookItem";
 import { getBooks } from "../../Store/bookSlice";
@@ -17,14 +17,16 @@ const BookList = ({ readBook }) => {
       <BookItem key={book.id} book={book} readBook={readBook} />
     ));
   return (
-    <div className="col bookList">
-      <h2 className="mb-3">Booklist</h2>
-      {isPending ? (
-        "Pending ... "
-      ) : (
-        <ul className="list-group">{bookListContent}</ul>
-      )}
-    </div>
+    <Fragment>
+      <div className="col bookList">
+        <h2 className="mb-3">Booklist</h2>
+        {isPending ? (
+          "Pending ... "
+        ) : (
+          <ul className="list-group">{bookListContent}</ul>
+        )}
+      </div>
+    </Fragment>
   );
 };
 

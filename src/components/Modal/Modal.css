@@ -1,0 +1,37 @@
+.Back {
+  position: fixed;
+  background: black;
+  opacity: 60%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+}
+
+.Overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 10px;
+  z-index: 1000;
+  opacity: 100%;
+}
+
+.hide {
+  visibility: hidden;
+  opacity: 0%;
+  transition: all 0.2s;
+}
+
+.show {
+  visibility: visible;
+  opacity: 100%;
+}
+
+.DeleteModal {
+  width: 400px;
+  padding: 20px;
+}

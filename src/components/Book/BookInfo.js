@@ -8,11 +8,21 @@ const BookInfo = () => {
       <h2 className="mb-3">Book info</h2>
       {bookSelected ? (
         <ul>
-          <li>ID: {bookSelected.id}</li>
-          <li>Title: {bookSelected.title}</li>
-          <li>Author: {bookSelected.author}</li>
-          <li>Price: {bookSelected.price}</li>
-          <li>Description: {bookSelected.description}</li>
+          <li>
+            ID: <b>{bookSelected.id}</b>
+          </li>
+          <li>
+            Title: <b>{bookSelected.title}</b>
+          </li>
+          <li>
+            Author: <b>{bookSelected.author}</b>
+          </li>
+          <li>
+            Price: <b>{bookSelected.price}</b>
+          </li>
+          <li>
+            Description: <b>{bookSelected.description}</b>
+          </li>
         </ul>
       ) : (
         <div className="alert alert-dark" role="alert">
