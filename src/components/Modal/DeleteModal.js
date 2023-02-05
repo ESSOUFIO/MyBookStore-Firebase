@@ -21,7 +21,7 @@ const DeleteModal = () => {
       <hr />
       <p>Are you sure to delete the book titled: </p>
       <span>
-        <b>"{bookSelected.title}" ?</b>
+        <b>"{bookSelected && bookSelected.title}" ?</b>
       </span>
       <div className="mt-4 text-end">
         <button

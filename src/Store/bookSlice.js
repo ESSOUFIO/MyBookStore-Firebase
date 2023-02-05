@@ -109,5 +109,5 @@ const bookSlice = createSlice({
   },
 });
 
-export const { selectBook } = bookSlice.actions;
+export const { selectBook, filterBooks } = bookSlice.actions;
 export default bookSlice.reducer;

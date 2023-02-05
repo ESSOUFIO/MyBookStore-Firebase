@@ -1,6 +1,9 @@
 import React from "react";
 
-const FilterInput = () => {
+const FilterInput = ({ TitleInput }) => {
+  const filterHandler = ({ target }) => {
+    TitleInput(target.value);
+  };
   return (
     <div className="w-100">
       <input
@@ -8,6 +11,7 @@ const FilterInput = () => {
         type="text"
         placeholder="Filter by title..."
         style={{ fontSize: "1rem" }}
+        onChange={filterHandler}
       />
     </div>
   );
