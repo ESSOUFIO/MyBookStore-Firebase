@@ -5,9 +5,7 @@ import { getBooks } from "../../Store/bookSlice";
 import FilterInput from "../Filter/FilterInput";
 
 const BookList = ({ readBook }) => {
-  const { books, booksFiltred, isPending } = useSelector(
-    (state) => state.books
-  );
+  const { books, isPending } = useSelector((state) => state.books);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,9 +22,11 @@ const BookList = ({ readBook }) => {
   };
 
   // Init State
-  const [booksList, setBooksList] = useState((prev) => {
-    return books && bookListContent(books);
-  });
+  const [booksList, setBooksList] = useState();
+
+  useEffect(() => {
+    setBooksList(bookListContent(books));
+  }, [books]);
 
   //Filter Handler
   const TitleInput = (input) => {
