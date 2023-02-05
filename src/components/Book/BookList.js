@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BookItem from "./BookItem";
 import { getBooks } from "../../Store/bookSlice";
+import FilterInput from "../Filter/FilterInput";
 
 const BookList = ({ readBook }) => {
   const { books, isPending } = useSelector((state) => state.books);
@@ -19,7 +20,10 @@ const BookList = ({ readBook }) => {
   return (
     <Fragment>
       <div className="col bookList">
-        <h2 className="mb-3">Booklist</h2>
+        <div className="d-flex my-2">
+          <h2 className="mb-3 me-5">Booklist</h2>
+          <FilterInput />
+        </div>
         {isPending ? (
           "Pending ... "
         ) : (
