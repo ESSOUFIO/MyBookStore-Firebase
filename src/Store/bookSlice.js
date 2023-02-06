@@ -55,6 +55,7 @@ export const deleteBook = createAsyncThunk(
 const bookSlice = createSlice({
   name: "book",
   initialState: {
+    booksAPI: [],
     books: [],
     isPending: false,
     error: null,
@@ -63,6 +64,16 @@ const bookSlice = createSlice({
   reducers: {
     selectBook: (state, action) => {
       state.bookSelected = action.payload;
+    },
+
+    filterBooks: (state, action) => {
+      if (action.payload) {
+        state.books = state.booksAPI.filter((el) =>
+          el.title.toLowerCase().includes(action.payload.toLowerCase())
+        );
+      } else {
+        state.books = state.booksAPI;
+      }
     },
   },
   extraReducers: (builder) => {
@@ -73,6 +84,7 @@ const bookSlice = createSlice({
 
     builder.addCase(getBooks.fulfilled, (state, action) => {
       state.isPending = false;
+      state.booksAPI = action.payload;
       state.books = action.payload;
     });
 
@@ -87,6 +99,7 @@ const bookSlice = createSlice({
     });
 
     builder.addCase(inserBook.fulfilled, (state, action) => {
+      state.booksAPI.push(action.payload);
       state.books.push(action.payload);
     });
 
@@ -100,6 +113,9 @@ const bookSlice = createSlice({
     });
 
     builder.addCase(deleteBook.fulfilled, (state, action) => {
+      state.booksAPI = state.booksAPI.filter(
+        (el) => el.id !== action.payload.id
+      );
       state.books = state.books.filter((el) => el.id !== action.payload.id);
     });
 

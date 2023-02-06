@@ -1,9 +1,10 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { filterBooks } from "../../Store/bookSlice";
 
-const FilterInput = ({ TitleInput }) => {
-  const filterHandler = ({ target }) => {
-    TitleInput(target.value);
-  };
+const FilterInput = () => {
+  const dispatch = useDispatch();
+
   return (
     <div className="w-100">
       <input
@@ -11,7 +12,7 @@ const FilterInput = ({ TitleInput }) => {
         type="text"
         placeholder="Filter by title..."
         style={{ fontSize: "1rem" }}
-        onChange={filterHandler}
+        onChange={(e) => dispatch(filterBooks(e.target.value))}
       />
     </div>
   );
