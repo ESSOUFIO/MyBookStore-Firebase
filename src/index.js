@@ -18,5 +18,5 @@ root.render(
 
 reportWebVitals();
 
-//! Firebase
 //! Light / Dark theme
+//! Loading

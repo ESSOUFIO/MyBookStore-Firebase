@@ -13,8 +13,9 @@ const AddForm = () => {
 
   const SubmitHandler = (e) => {
     e.preventDefault();
+    const ID = Math.floor(Math.random() * 100);
     const newBook = {
-      id: Math.floor(Math.random() * 100),
+      id: ID.toString(),
       title: titleRef.current.value,
       price: priceRef.current.value,
       author: authorRef.current.value,

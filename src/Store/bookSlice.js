@@ -1,18 +1,78 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { db } from "../firebase/firebase";
 
-export const inserBook = createAsyncThunk(
-  "book/inserBook",
-  async (newBook, thunkAPI) => {
+// export const getBooks = createAsyncThunk(
+//   "book/getBooks",
+//   async (_, thunkAPI) => {
+//     const { rejectWithValue } = thunkAPI;
+//     try {
+//       const res = await fetch("http://localhost:3005/books");
+//       const data = await res.json();
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+// export const deleteBook = createAsyncThunk(
+//   "book/deleteBook",
+//   async (book, thunkAPI) => {
+//     const { rejectWithValue } = thunkAPI;
+//     try {
+//       await fetch(`http://localhost:3005/books/${book.id}`, {
+//         method: "DELETE",
+//         headers: {
+//           "Content-Type": "application/json",
+//           Accept: "application/json",
+//         },
+//       });
+//       return book;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+// export const inserBook = createAsyncThunk(
+//   "book/inserBook",
+//   async (newBook, thunkAPI) => {
+//     const { rejectWithValue } = thunkAPI;
+//     try {
+//       const res = await fetch("http://localhost:3005/books", {
+//         method: "POST",
+//         body: JSON.stringify(newBook),
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//       });
+//       const data = await res.json();
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+export const getBooks = createAsyncThunk(
+  "book/getBooks",
+  async (_, thunkAPI) => {
+    // Promise : get data From Firebase
+    function getFromFirebase() {
+      return new Promise((resolve, reject) => {
+        const res = db.collection("books").onSnapshot((snap) => {
+          let fitched = snap.docs.map((doc) => {
+            return { ...doc.data(), id: doc.id };
+          });
+          resolve(fitched);
+        });
+        return res;
+      });
+    }
+
     const { rejectWithValue } = thunkAPI;
     try {
-      const res = await fetch("http://localhost:3005/books", {
-        method: "POST",
-        body: JSON.stringify(newBook),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await res.json();
+      const data = await getFromFirebase();
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -20,14 +80,22 @@ export const inserBook = createAsyncThunk(
   }
 );
 
-export const getBooks = createAsyncThunk(
-  "book/getBooks",
-  async (_, thunkAPI) => {
+export const inserBook = createAsyncThunk(
+  "book/inserBook",
+  async (newBook, thunkAPI) => {
+    // Promise : insert data to Firebase
+    function insertFirebase() {
+      return new Promise((resolve, reject) => {
+        const { id, ...rest } = newBook;
+        db.collection("books").doc(newBook.id).set(rest);
+        resolve(newBook);
+      });
+    }
+
     const { rejectWithValue } = thunkAPI;
     try {
-      const res = await fetch("http://localhost:3005/books");
-      const data = await res.json();
-      return data;
+      const res = await insertFirebase();
+      return res;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -37,21 +105,24 @@ export const getBooks = createAsyncThunk(
 export const deleteBook = createAsyncThunk(
   "book/deleteBook",
   async (book, thunkAPI) => {
+    // Promise : insert data to Firebase
+    function deleteFirebase() {
+      return new Promise((resolve, reject) => {
+        db.collection("books").doc(book.id).delete();
+        resolve(book);
+      });
+    }
+
     const { rejectWithValue } = thunkAPI;
     try {
-      await fetch(`http://localhost:3005/books/${book.id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
+      await deleteFirebase();
       return book;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
+
 const bookSlice = createSlice({
   name: "book",
   initialState: {
