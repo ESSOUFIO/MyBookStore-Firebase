@@ -41,7 +41,7 @@ const BookItem = ({ book }) => {
       </h6>
 
       <div
-        className="btn-group w-100 mb-1 my-md-0  my-3 flex-shrink-1 justify-content-center justify-content-md-end"
+        className="btn-group btn-group-md w-100 mb-1 my-md-0  my-3 flex-shrink-1 justify-content-center justify-content-md-end"
         role="group"
         aria-label="Basic mixed styles example"
       >
