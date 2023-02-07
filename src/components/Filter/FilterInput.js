@@ -8,10 +8,13 @@ const FilterInput = () => {
   return (
     <div className="w-100">
       <input
-        className={`form-control form-control-sm mt-1 bg-${mode}`}
+        className={`form-control form-control-sm mt-1`}
+        style={{
+          background: mode === "light" ? "#F8F9FA" : "#050122",
+          fontSize: "1rem",
+        }}
         type="text"
         placeholder="Filter by title..."
-        style={{ fontSize: "1rem" }}
         onChange={(e) => dispatch(filterBooks(e.target.value))}
       />
     </div>
