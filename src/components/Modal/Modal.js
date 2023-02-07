@@ -12,7 +12,7 @@ const Back = () => {
 };
 
 const Overlay = ({ children }) => {
-  return <div className="Overlay">{children}</div>;
+  return <div className="Overlay text-white bg-dark">{children}</div>;
 };
 
 const Modal = ({ children }) => {
@@ -20,7 +20,7 @@ const Modal = ({ children }) => {
   return (
     <div>
       {ReactDOM.createPortal(
-        <div className={modal ? "show" : "hide"}>
+        <div className={`${modal ? "show" : "hide"}  text-white bg-dark`}>
           <Back />
           <Overlay>{children}</Overlay>
         </div>,

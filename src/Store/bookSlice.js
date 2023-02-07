@@ -166,21 +166,23 @@ const bookSlice = createSlice({
 
     //** ==== INSERT A NEW BOOK ===== */
     builder.addCase(inserBook.pending, (state, action) => {
-      ///
+      state.isPending = true;
     });
 
     builder.addCase(inserBook.fulfilled, (state, action) => {
       state.booksAPI.push(action.payload);
       state.books.push(action.payload);
+      state.isPending = false;
     });
 
     builder.addCase(inserBook.rejected, (state, action) => {
       state.error = action.payload;
+      state.isPending = false;
     });
 
     //** ==== DELETE A BOOK ===== */
     builder.addCase(deleteBook.pending, (state, action) => {
-      ///
+      state.isPending = true;
     });
 
     builder.addCase(deleteBook.fulfilled, (state, action) => {
@@ -188,10 +190,12 @@ const bookSlice = createSlice({
         (el) => el.id !== action.payload.id
       );
       state.books = state.books.filter((el) => el.id !== action.payload.id);
+      state.isPending = false;
     });
 
     builder.addCase(deleteBook.rejected, (state, action) => {
       state.error = action.payload;
+      state.isPending = false;
     });
   },
 });

@@ -18,14 +18,15 @@ const BookList = ({ readBook }) => {
       <BookItem key={book.id} book={book} readBook={readBook} />
     ));
 
+  const { textMode } = useSelector((state) => state.ui);
   return (
     <Fragment>
-      <div className="col bookList">
+      <div className="col bookList pe-4">
         <div className="d-flex my-2">
-          <h2 className="mb-3 me-5">Booklist</h2>
+          <h2 className={`mb-3 me-5 text-${textMode}`}>Booklist</h2>
           <FilterInput />
         </div>
-        {isPending ? (
+        {!books && isPending ? (
           "Pending ... "
         ) : (
           <ul className="list-group">{bookListContent}</ul>

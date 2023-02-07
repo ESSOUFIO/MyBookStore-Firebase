@@ -2,7 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const uiSlice = createSlice({
   name: "ui",
-  initialState: { modal: false, modalInsert: false, modalDelete: false },
+  initialState: {
+    modal: false,
+    modalInsert: false,
+    modalDelete: false,
+    mode: "light",
+    textMode: "dark",
+  },
   reducers: {
     showHideModal: (state, action) => {
       state.modal = !state.modal;
@@ -15,8 +21,13 @@ const uiSlice = createSlice({
         state.modalInsert = false;
       }
     },
+
+    toggleTheme: (state) => {
+      state.mode = state.mode === "light" ? "dark" : "light";
+      state.textMode = state.mode === "light" ? "dark" : "light";
+    },
   },
 });
 
-export const { showHideModal } = uiSlice.actions;
+export const { showHideModal, toggleTheme } = uiSlice.actions;
 export default uiSlice.reducer;

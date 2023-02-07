@@ -15,3 +15,12 @@ code {
 html {
   zoom: 90%;
 }
+
+* {
+  transition: all 0.5s;
+}
+
+li,
+li b {
+  transition: all 0.1s;
+}

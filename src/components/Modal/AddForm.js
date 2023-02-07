@@ -32,20 +32,20 @@ const AddForm = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
   return (
     <div
-      className="AddForm px-4"
+      className="AddForm px-4 text-white bg-dark"
       style={{ margin: "30px auto", display: modalInsert ? "block" : "none" }}
     >
       <h2 className="mb-3">Insert a book</h2>
 
-      <form onSubmit={SubmitHandler}>
+      <form onSubmit={SubmitHandler} className="">
         <div className="mb-3 ">
-          <div className="mb-3">
+          <div className="mb-3 ">
             <label htmlFor="title" className="form-label">
               Title
             </label>
             <input
               type="text"
-              className="form-control"
+              className="form-control bg-dark text-light"
               id="title"
               ref={titleRef}
               autoComplete="off"
